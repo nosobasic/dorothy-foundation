@@ -1,0 +1,57 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-off-white text-deep-navy;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply text-deep-navy font-semibold;
+  }
+  
+  a {
+    @apply transition-colors;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-6 py-3 rounded-md font-medium transition-all focus:outline-none focus:ring-2 focus:ring-offset-2;
+  }
+  
+  .btn-primary {
+    @apply btn bg-muted-gold text-white hover:bg-muted-gold/90 focus:ring-muted-gold;
+  }
+  
+  .btn-secondary {
+    @apply btn bg-deep-navy text-white hover:bg-deep-navy/90 focus:ring-deep-navy;
+  }
+  
+  .btn-outline {
+    @apply btn border-2 border-deep-navy text-deep-navy hover:bg-deep-navy hover:text-white focus:ring-deep-navy;
+  }
+  
+  .input {
+    @apply w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-muted-gold focus:border-transparent;
+  }
+  
+  .label {
+    @apply block text-sm font-medium text-deep-navy mb-1;
+  }
+  
+  .card {
+    @apply bg-white rounded-lg shadow-md p-6;
+  }
+  
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+/* Skip to content link */
+.skip-link {
+  @apply absolute -top-10 left-0 bg-muted-gold text-white px-4 py-2 z-50 focus:top-0;
+}
+
