@@ -39,9 +39,9 @@ export default function Gallery() {
         height="medium"
       />
 
-      <section className="py-16 bg-white">
+      <section className="py-12 md:py-16 bg-white">
         <div className="container-custom">
-          <div className="text-center mb-8">
+          <div className="text-center mb-6 md:mb-8">
             <Link to="/gallery/submit" className="btn-primary">
               Submit a Photo
             </Link>
@@ -50,7 +50,7 @@ export default function Gallery() {
           {loading ? (
             <p className="text-center text-gray-600">Loading photos...</p>
           ) : photos.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-6">
               {photos.map((photo, index) => (
                 <button
                   key={photo.id}

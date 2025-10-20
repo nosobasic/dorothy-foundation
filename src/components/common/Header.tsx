@@ -17,8 +17,8 @@ export default function Header() {
 
   return (
     <header className="bg-white shadow-sm">
-      <nav className="container-custom" aria-label="Main navigation">
-        <div className="flex justify-between items-center h-20">
+      <nav className="container-custom px-4" aria-label="Main navigation">
+        <div className="flex justify-between items-center h-16 md:h-20">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <div className="text-deep-navy">

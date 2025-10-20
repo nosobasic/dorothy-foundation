@@ -21,9 +21,9 @@ export default function Hero({
     console.log('Hero background image:', backgroundImage)
   }
   const heightClasses = {
-    small: 'min-h-[300px]',
-    medium: 'min-h-[400px]',
-    large: 'min-h-[600px]',
+    small: 'min-h-[250px] md:min-h-[300px]',
+    medium: 'min-h-[350px] md:min-h-[400px]',
+    large: 'min-h-[500px] md:min-h-[600px]',
   }
 
   return (
@@ -46,12 +46,12 @@ export default function Hero({
       )}
 
       {/* Content */}
-      <div className="relative z-10 container-custom text-center">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-white">
+      <div className="relative z-10 container-custom text-center px-4">
+        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 md:mb-4 text-white leading-tight">
           {title}
         </h1>
         {subtitle && (
-          <p className="text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl md:text-2xl text-gray-200 mb-6 md:mb-8 max-w-3xl mx-auto leading-relaxed px-2">
             {subtitle}
           </p>
         )}

@@ -168,7 +168,7 @@ export default function Donate() {
               {/* Amount Selection */}
               <div>
                 <h3 className="text-xl font-semibold mb-4">Select Amount</h3>
-                <div className="grid grid-cols-3 md:grid-cols-5 gap-3 mb-4">
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 sm:gap-3 mb-4">
                   {PRESET_AMOUNTS.map((amount) => (
                     <button
                       key={amount}
@@ -177,7 +177,7 @@ export default function Donate() {
                         setSelectedAmount(amount)
                         setCustomAmount('')
                       }}
-                      className={`py-3 px-4 rounded-md border-2 font-semibold transition-colors ${
+                      className={`py-2 sm:py-3 px-2 sm:px-4 rounded-md border-2 font-semibold transition-colors text-sm sm:text-base ${
                         selectedAmount === amount
                           ? 'border-muted-gold bg-muted-gold text-white'
                           : 'border-gray-300 hover:border-muted-gold'
