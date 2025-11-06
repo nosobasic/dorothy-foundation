@@ -57,7 +57,7 @@ export default function Hero({
             <img
               src={overlayImage}
               alt="Dorothy R. Morgan"
-              className="max-w-full max-h-full object-contain opacity-20 rounded-3xl"
+              className="max-w-full max-h-full object-contain opacity-30 rounded-3xl"
               style={{ 
                 transform: 'rotate(-90deg)',
                 transformOrigin: 'center center',
