@@ -11,15 +11,49 @@ export default function About() {
           {/* Dorothy's Story */}
           <div className="mb-16">
             <h2 className="text-3xl font-bold mb-6">Remembering Dorothy R. Morgan</h2>
-            <div className="prose prose-lg max-w-none">
-              <p className="text-gray-700 leading-relaxed">{ABOUT_DOROTHY}</p>
+            <div className="grid md:grid-cols-2 gap-6 md:gap-8 mb-8">
+              <div className="order-2 md:order-1">
+                <div className="prose prose-lg max-w-none">
+                  <p className="text-gray-700 leading-relaxed mb-4">{ABOUT_DOROTHY}</p>
+                </div>
+              </div>
+              <div className="order-1 md:order-2 space-y-4 md:space-y-6">
+                <div className="relative">
+                  <img
+                    src="/drm-image2.jpg"
+                    alt="Dorothy R. Morgan"
+                    className="w-full h-auto rounded-lg shadow-lg object-cover border-2 border-brand-purple/20"
+                  />
+                  <div className="absolute -bottom-1 -right-1 md:-bottom-2 md:-right-2 w-full h-full border-2 border-brand-lavender/30 rounded-lg -z-10" />
+                </div>
+                <div className="relative">
+                  <img
+                    src="/drm-image5.jpg"
+                    alt="Dorothy R. Morgan with family"
+                    className="w-full h-auto rounded-lg shadow-lg object-cover border-2 border-brand-purple/20"
+                  />
+                  <div className="absolute -bottom-1 -right-1 md:-bottom-2 md:-right-2 w-full h-full border-2 border-brand-lavender/30 rounded-lg -z-10" />
+                </div>
+              </div>
+            </div>
+            {/* Background accent image */}
+            <div className="relative mt-8 rounded-lg overflow-hidden bg-gray-50 p-8">
+              <div
+                className="absolute inset-0 opacity-5 bg-cover bg-center bg-no-repeat"
+                style={{ backgroundImage: 'url(/drm-image.jpg)' }}
+              />
+              <div className="relative z-10">
+                <p className="text-gray-700 leading-relaxed italic text-center">
+                  "Her spirit lives on through the lives she touched and the love she shared."
+                </p>
+              </div>
             </div>
           </div>
 
           {/* Mission */}
           <div className="mb-16">
             <h2 className="text-3xl font-bold mb-6">Our Mission</h2>
-            <div className="card bg-gray-50 border-l-4 border-muted-gold">
+            <div className="card bg-gray-50 border-l-4 border-brand-purple">
               <p className="text-lg text-gray-700 leading-relaxed">{MISSION_STATEMENT}</p>
             </div>
           </div>

@@ -223,7 +223,7 @@ export default function AdminEvents() {
                 <input
                   type="checkbox"
                   id="is_published"
-                  className="w-4 h-4 text-muted-gold border-gray-300 rounded focus:ring-muted-gold"
+                  className="w-4 h-4 text-brand-purple border-gray-300 rounded focus:ring-brand-purple"
                   {...register('is_published')}
                 />
                 <label htmlFor="is_published" className="ml-2 text-sm font-medium">

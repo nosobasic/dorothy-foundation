@@ -39,7 +39,7 @@ export default function Events() {
                   className="card hover:shadow-lg transition-shadow"
                 >
                   <div className="mb-4">
-                    <span className="inline-block px-3 py-1 text-sm bg-muted-gold/10 text-muted-gold rounded-full">
+                    <span className="inline-block px-3 py-1 text-sm bg-brand-purple/10 text-brand-purple rounded-full">
                       {format(new Date(event.start_at), 'MMM dd, yyyy')}
                     </span>
                   </div>
@@ -69,7 +69,7 @@ export default function Events() {
                     </p>
                   )}
                   {event.summary && <p className="text-gray-600 mb-4">{event.summary}</p>}
-                  <span className="text-muted-gold font-medium">Learn More →</span>
+                  <span className="text-brand-purple font-medium">Learn More →</span>
                 </Link>
               ))}
             </div>

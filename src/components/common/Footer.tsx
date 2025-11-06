@@ -28,7 +28,7 @@ export default function Footer() {
             <address className="text-gray-300 text-sm not-italic space-y-2">
               <p>{CONTACT_INFO.phone}</p>
               <p>
-                <a href={`mailto:${CONTACT_INFO.email}`} className="hover:text-muted-gold">
+                <a href={`mailto:${CONTACT_INFO.email}`} className="hover:text-brand-purple">
                   {CONTACT_INFO.email}
                 </a>
               </p>
@@ -40,26 +40,26 @@ export default function Footer() {
           <div>
             <h4 className="text-lg font-semibold mb-4 text-white">Quick Links</h4>
             <nav className="space-y-2" aria-label="Footer navigation">
-              <Link to="/about" className="block text-gray-300 hover:text-muted-gold text-sm">
+              <Link to="/about" className="block text-gray-300 hover:text-brand-purple text-sm">
                 About
               </Link>
-              <Link to="/events" className="block text-gray-300 hover:text-muted-gold text-sm">
+              <Link to="/events" className="block text-gray-300 hover:text-brand-purple text-sm">
                 Events
               </Link>
-              <Link to="/donate" className="block text-gray-300 hover:text-muted-gold text-sm">
+              <Link to="/donate" className="block text-gray-300 hover:text-brand-purple text-sm">
                 Donate
               </Link>
-              <Link to="/volunteer" className="block text-gray-300 hover:text-muted-gold text-sm">
+              <Link to="/volunteer" className="block text-gray-300 hover:text-brand-purple text-sm">
                 Volunteer
               </Link>
-              <Link to="/contact" className="block text-gray-300 hover:text-muted-gold text-sm">
+              <Link to="/contact" className="block text-gray-300 hover:text-brand-purple text-sm">
                 Contact
               </Link>
             </nav>
             <div className="flex space-x-4 mt-4">
               <a
                 href={SOCIAL_LINKS.facebook}
-                className="text-gray-300 hover:text-muted-gold"
+                className="text-gray-300 hover:text-brand-purple"
                 aria-label="Facebook"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -69,7 +69,7 @@ export default function Footer() {
               </a>
               <a
                 href={SOCIAL_LINKS.instagram}
-                className="text-gray-300 hover:text-muted-gold"
+                className="text-gray-300 hover:text-brand-purple"
                 aria-label="Instagram"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -84,10 +84,10 @@ export default function Footer() {
         <div className="border-t border-gray-700 mt-8 pt-8 flex flex-col sm:flex-row justify-between items-center text-sm text-gray-400">
           <p>&copy; {currentYear} The Dorothy R. Morgan Foundation. All rights reserved.</p>
           <div className="flex space-x-6 mt-4 sm:mt-0">
-            <Link to="/privacy" className="hover:text-muted-gold">
+            <Link to="/privacy" className="hover:text-brand-purple">
               Privacy Policy
             </Link>
-            <Link to="/donation-terms" className="hover:text-muted-gold">
+            <Link to="/donation-terms" className="hover:text-brand-purple">
               Donation Terms
             </Link>
           </div>

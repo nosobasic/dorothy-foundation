@@ -58,7 +58,7 @@ export default function Gallery() {
                     setLightboxIndex(index)
                     setLightboxOpen(true)
                   }}
-                  className="group relative aspect-square overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow focus:outline-none focus:ring-2 focus:ring-muted-gold"
+                  className="group relative aspect-square overflow-hidden rounded-lg shadow-md hover:shadow-xl transition-shadow focus:outline-none focus:ring-2 focus:ring-brand-purple"
                 >
                   <img
                     src={photo.url}
@@ -81,7 +81,7 @@ export default function Gallery() {
           ) : (
             <div className="text-center py-12">
               <p className="text-gray-600 mb-4">No photos in the gallery yet.</p>
-              <Link to="/gallery/submit" className="text-muted-gold hover:underline">
+              <Link to="/gallery/submit" className="text-brand-purple hover:underline">
                 Be the first to submit a photo!
               </Link>
             </div>

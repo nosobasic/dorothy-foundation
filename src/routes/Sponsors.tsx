@@ -42,9 +42,9 @@ export default function Sponsors() {
           ) : tiers.length > 0 ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {tiers.map((tier) => (
-                <div key={tier.id} className="card border-2 border-gray-200 hover:border-muted-gold transition-colors">
+                <div key={tier.id} className="card border-2 border-gray-200 hover:border-brand-purple transition-colors">
                   <h3 className="text-2xl font-bold mb-2">{tier.name}</h3>
-                  <p className="text-3xl font-bold text-muted-gold mb-6">
+                  <p className="text-3xl font-bold text-brand-purple mb-6">
                     ${(tier.amount_cents / 100).toLocaleString()}
                   </p>
                   {tier.benefits_json && (
@@ -54,7 +54,7 @@ export default function Sponsors() {
                         {Object.entries(tier.benefits_json).map(([key, value]) => (
                           <li key={key} className="flex items-start">
                             <svg
-                              className="w-5 h-5 mr-2 text-muted-gold flex-shrink-0 mt-0.5"
+                              className="w-5 h-5 mr-2 text-brand-purple flex-shrink-0 mt-0.5"
                               fill="none"
                               stroke="currentColor"
                               viewBox="0 0 24 24"

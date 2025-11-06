@@ -31,7 +31,7 @@ export default function AdminDashboard() {
           {loading ? (
             <p className="text-2xl font-bold">Loading...</p>
           ) : (
-            <p className="text-3xl font-bold text-muted-gold">
+            <p className="text-3xl font-bold text-brand-purple">
               ${stats ? (stats.total_amount_cents / 100).toLocaleString() : '0'}
             </p>
           )}
@@ -65,19 +65,19 @@ export default function AdminDashboard() {
       <div className="card">
         <h2 className="text-xl font-bold mb-4">Quick Links</h2>
         <div className="grid md:grid-cols-2 gap-4">
-          <a href="/admin/events" className="block p-4 border-2 border-gray-200 rounded-lg hover:border-muted-gold transition-colors">
+          <a href="/admin/events" className="block p-4 border-2 border-gray-200 rounded-lg hover:border-brand-purple transition-colors">
             <h3 className="font-semibold mb-2">Manage Events</h3>
             <p className="text-sm text-gray-600">Create, edit, and publish events</p>
           </a>
-          <a href="/admin/gallery" className="block p-4 border-2 border-gray-200 rounded-lg hover:border-muted-gold transition-colors">
+          <a href="/admin/gallery" className="block p-4 border-2 border-gray-200 rounded-lg hover:border-brand-purple transition-colors">
             <h3 className="font-semibold mb-2">Moderate Gallery</h3>
             <p className="text-sm text-gray-600">Approve or reject photo submissions</p>
           </a>
-          <a href="/admin/donations" className="block p-4 border-2 border-gray-200 rounded-lg hover:border-muted-gold transition-colors">
+          <a href="/admin/donations" className="block p-4 border-2 border-gray-200 rounded-lg hover:border-brand-purple transition-colors">
             <h3 className="font-semibold mb-2">View Donations</h3>
             <p className="text-sm text-gray-600">See all donation records</p>
           </a>
-          <a href="/admin/sponsors" className="block p-4 border-2 border-gray-200 rounded-lg hover:border-muted-gold transition-colors">
+          <a href="/admin/sponsors" className="block p-4 border-2 border-gray-200 rounded-lg hover:border-brand-purple transition-colors">
             <h3 className="font-semibold mb-2">Manage Sponsors</h3>
             <p className="text-sm text-gray-600">Edit sponsor tiers and benefits</p>
           </a>

@@ -179,8 +179,8 @@ export default function Donate() {
                       }}
                       className={`py-2 sm:py-3 px-2 sm:px-4 rounded-md border-2 font-semibold transition-colors text-sm sm:text-base ${
                         selectedAmount === amount
-                          ? 'border-muted-gold bg-muted-gold text-white'
-                          : 'border-gray-300 hover:border-muted-gold'
+                          ? 'border-brand-purple bg-brand-purple text-white'
+                          : 'border-gray-300 hover:border-brand-purple'
                       }`}
                     >
                       ${amount}
@@ -217,7 +217,7 @@ export default function Donate() {
                 <input
                   type="checkbox"
                   id="is_recurring"
-                  className="w-4 h-4 text-muted-gold border-gray-300 rounded focus:ring-muted-gold"
+                  className="w-4 h-4 text-brand-purple border-gray-300 rounded focus:ring-brand-purple"
                   {...register('is_recurring')}
                 />
                 <label htmlFor="is_recurring" className="ml-2 text-sm font-medium">

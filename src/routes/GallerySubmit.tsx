@@ -162,7 +162,7 @@ export default function GallerySubmit() {
                   <input
                     type="checkbox"
                     id="consent_signed"
-                    className="mt-1 w-4 h-4 text-muted-gold border-gray-300 rounded focus:ring-muted-gold"
+                    className="mt-1 w-4 h-4 text-brand-purple border-gray-300 rounded focus:ring-brand-purple"
                     {...register('consent_signed')}
                   />
                   <label htmlFor="consent_signed" className="ml-2 text-sm text-gray-700">

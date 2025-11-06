@@ -213,7 +213,7 @@ export default function AdminSponsors() {
                 <input
                   type="checkbox"
                   id="is_active"
-                  className="w-4 h-4 text-muted-gold border-gray-300 rounded focus:ring-muted-gold"
+                  className="w-4 h-4 text-brand-purple border-gray-300 rounded focus:ring-brand-purple"
                   {...register('is_active')}
                 />
                 <label htmlFor="is_active" className="ml-2 text-sm font-medium">

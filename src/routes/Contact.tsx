@@ -63,7 +63,7 @@ export default function Contact() {
               <div className="space-y-6">
                 <div className="flex items-start">
                   <svg
-                    className="w-6 h-6 text-muted-gold mr-4 flex-shrink-0"
+                    className="w-6 h-6 text-brand-purple mr-4 flex-shrink-0"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -83,7 +83,7 @@ export default function Contact() {
 
                 <div className="flex items-start">
                   <svg
-                    className="w-6 h-6 text-muted-gold mr-4 flex-shrink-0"
+                    className="w-6 h-6 text-brand-purple mr-4 flex-shrink-0"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -99,7 +99,7 @@ export default function Contact() {
                     <h3 className="font-semibold mb-1">Email</h3>
                     <a
                       href={`mailto:${CONTACT_INFO.email}`}
-                      className="text-muted-gold hover:underline"
+                      className="text-brand-purple hover:underline"
                     >
                       {CONTACT_INFO.email}
                     </a>
@@ -108,7 +108,7 @@ export default function Contact() {
 
                 <div className="flex items-start">
                   <svg
-                    className="w-6 h-6 text-muted-gold mr-4 flex-shrink-0"
+                    className="w-6 h-6 text-brand-purple mr-4 flex-shrink-0"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"

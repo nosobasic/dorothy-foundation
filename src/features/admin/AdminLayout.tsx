@@ -32,7 +32,7 @@ export default function AdminLayout() {
               {user && <p className="text-sm text-gray-300">{user.email}</p>}
             </div>
             <div className="flex items-center space-x-4">
-              <a href="/" className="text-sm hover:text-muted-gold" target="_blank" rel="noopener noreferrer">
+              <a href="/" className="text-sm hover:text-brand-purple" target="_blank" rel="noopener noreferrer">
                 View Website →
               </a>
               <button onClick={handleLogout} className="btn-outline border-white text-white hover:bg-white hover:text-deep-navy text-sm">

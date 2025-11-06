@@ -6,6 +6,7 @@ interface HeroProps {
   subtitle?: string
   children?: ReactNode
   backgroundImage?: string
+  overlayImage?: string
   height?: 'small' | 'medium' | 'large'
 }
 
@@ -14,12 +15,9 @@ export default function Hero({
   subtitle,
   children,
   backgroundImage,
+  overlayImage,
   height = 'large',
 }: HeroProps) {
-  // Debug: log the background image URL
-  if (backgroundImage) {
-    console.log('Hero background image:', backgroundImage)
-  }
   const heightClasses = {
     small: 'min-h-[250px] md:min-h-[300px]',
     medium: 'min-h-[350px] md:min-h-[400px]',
@@ -43,6 +41,32 @@ export default function Hero({
         </div>
       ) : (
         <div className="absolute inset-0 bg-gradient-to-br from-deep-navy to-deep-navy/80" />
+      )}
+
+      {/* Overlay Image - Centered, Rotated, and Transparent */}
+      {overlayImage && (
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-[5] overflow-hidden">
+          <div 
+            className="relative flex items-center justify-center"
+            style={{
+              // Container dimensions account for rotation - wider container for portrait result
+              width: 'clamp(250px, 35vw, 450px)',
+              height: 'clamp(350px, 45vw, 550px)',
+            }}
+          >
+            <img
+              src={overlayImage}
+              alt="Dorothy R. Morgan"
+              className="max-w-full max-h-full object-contain opacity-20 rounded-3xl"
+              style={{ 
+                transform: 'rotate(-90deg)',
+                transformOrigin: 'center center',
+                filter: 'blur(0.5px)',
+                mixBlendMode: 'soft-light',
+              }}
+            />
+          </div>
+        </div>
       )}
 
       {/* Content */}

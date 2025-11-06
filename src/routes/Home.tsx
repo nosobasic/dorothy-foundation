@@ -25,6 +25,7 @@ export default function Home() {
         subtitle="From Loss to Light"
         height="large"
         backgroundImage="/hero-tribute-in-light.jpg"
+        overlayImage="/drm-image4.png"
       >
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center mt-6 md:mt-8 px-4">
           <Link to="/donate" className="btn-primary text-base sm:text-lg px-6 sm:px-8 py-3 sm:py-4 w-full sm:w-auto text-center">
@@ -68,7 +69,7 @@ export default function Home() {
                     <p className="text-sm text-gray-600 mb-3">{event.location}</p>
                   )}
                   {event.summary && <p className="text-gray-600">{event.summary}</p>}
-                  <span className="text-muted-gold font-medium mt-4 inline-block">
+                  <span className="text-brand-purple font-medium mt-4 inline-block">
                     Learn More →
                   </span>
                 </Link>

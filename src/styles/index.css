@@ -3,12 +3,17 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --brand-purple: #6B46C1;
+    --brand-lavender: #C4B5FD;
+  }
+  
   body {
     @apply bg-off-white text-deep-navy;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    @apply text-deep-navy font-semibold;
+    @apply text-deep-navy font-semibold font-serif;
   }
   
   a {
@@ -22,7 +27,15 @@
   }
   
   .btn-primary {
-    @apply btn bg-muted-gold text-white hover:bg-muted-gold/90 focus:ring-muted-gold;
+    @apply btn text-white;
+    background-color: var(--brand-purple);
+  }
+  .btn-primary:hover {
+    background-color: rgba(107, 70, 193, 0.9);
+  }
+  .btn-primary:focus {
+    @apply ring-2 ring-offset-2;
+    --tw-ring-color: var(--brand-purple);
   }
   
   .btn-secondary {
@@ -34,7 +47,10 @@
   }
   
   .input {
-    @apply w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-muted-gold focus:border-transparent text-base;
+    @apply w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:border-transparent text-base;
+  }
+  .input:focus {
+    --tw-ring-color: var(--brand-purple);
   }
   
   .label {
@@ -52,6 +68,7 @@
 
 /* Skip to content link */
 .skip-link {
-  @apply absolute -top-10 left-0 bg-muted-gold text-white px-4 py-2 z-50 focus:top-0;
+  @apply absolute -top-10 left-0 text-white px-4 py-2 z-50 focus:top-0;
+  background-color: var(--brand-purple);
 }
 

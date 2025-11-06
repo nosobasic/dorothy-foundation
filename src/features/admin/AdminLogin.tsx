@@ -80,7 +80,7 @@ export default function AdminLogin() {
           </form>
         </div>
         <div className="text-center mt-4">
-          <a href="/" className="text-sm text-gray-600 hover:text-muted-gold">
+          <a href="/" className="text-sm text-gray-600 hover:text-brand-purple">
             ← Back to Website
           </a>
         </div>
