@@ -8,6 +8,10 @@
     --brand-lavender: #C4B5FD;
   }
   
+  html {
+    scroll-behavior: smooth;
+  }
+  
   body {
     @apply bg-off-white text-deep-navy;
   }

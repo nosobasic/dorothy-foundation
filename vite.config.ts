@@ -18,4 +18,9 @@ export default defineConfig({
       },
     },
   },
+  preview: {
+    port: 3000,
+    // Ensure SPA routing works in preview mode
+    strictPort: true,
+  },
 })

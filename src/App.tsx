@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import { Toaster } from '@/components/common/Toaster'
 import Layout from '@/components/common/Layout'
+import ScrollToTop from '@/components/common/ScrollToTop'
 
 // Pages
 import Home from '@/routes/Home'
@@ -15,6 +16,7 @@ import Sponsors from '@/routes/Sponsors'
 import Contact from '@/routes/Contact'
 import Privacy from '@/routes/Privacy'
 import DonationTerms from '@/routes/DonationTerms'
+import NotFound from '@/routes/NotFound'
 
 // Admin
 import AdminLayout from '@/features/admin/AdminLayout'
@@ -28,6 +30,7 @@ import AdminLogin from '@/features/admin/AdminLogin'
 function App() {
   return (
     <>
+      <ScrollToTop />
       <Routes>
         {/* Public routes */}
         <Route path="/" element={<Layout />}>
@@ -54,6 +57,9 @@ function App() {
           <Route path="donations" element={<AdminDonations />} />
           <Route path="sponsors" element={<AdminSponsors />} />
         </Route>
+
+        {/* 404 Catch-all - must be last */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
       <Toaster />
     </>
