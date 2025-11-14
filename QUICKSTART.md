@@ -52,6 +52,7 @@ cp backend/.env.example backend/.env
 
 # Edit both .env files and add your Stripe test keys
 # Get them from: https://dashboard.stripe.com/test/apikeys
+# Optionally add VITE_CLERK_PUBLISHABLE_KEY for Clerk authentication
 ```
 
 ### 3. Start Database (Docker)

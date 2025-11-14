@@ -26,6 +26,7 @@ import AdminGallery from '@/features/admin/AdminGallery'
 import AdminDonations from '@/features/admin/AdminDonations'
 import AdminSponsors from '@/features/admin/AdminSponsors'
 import AdminLogin from '@/features/admin/AdminLogin'
+import AdminGuard from '@/features/admin/AdminGuard'
 
 function App() {
   return (
@@ -50,7 +51,14 @@ function App() {
 
         {/* Admin routes */}
         <Route path="/admin/login" element={<AdminLogin />} />
-        <Route path="/admin" element={<AdminLayout />}>
+        <Route
+          path="/admin"
+          element={
+            <AdminGuard>
+              <AdminLayout />
+            </AdminGuard>
+          }
+        >
           <Route index element={<AdminDashboard />} />
           <Route path="events" element={<AdminEvents />} />
           <Route path="gallery" element={<AdminGallery />} />

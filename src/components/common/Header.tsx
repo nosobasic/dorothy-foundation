@@ -1,9 +1,19 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Dialog } from '@headlessui/react'
+import { SignedIn, SignedOut, useClerk, UserButton } from '@clerk/clerk-react'
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const { openSignIn } = useClerk()
+
+  const handleAdminSignIn = () => {
+    openSignIn({
+      afterSignInUrl: '/admin',
+      afterSignUpUrl: '/admin',
+      signUpForceRedirectUrl: '/admin',
+    })
+  }
 
   const navigation = [
     { name: 'Home', href: '/' },
@@ -49,6 +59,14 @@ export default function Header() {
             <Link to="/donate" className="btn-primary">
               Donate
             </Link>
+            <SignedOut>
+              <button type="button" className="btn-outline" onClick={handleAdminSignIn}>
+                Admin Sign In
+              </button>
+            </SignedOut>
+            <SignedIn>
+              <UserButton afterSignOutUrl="/" />
+            </SignedIn>
           </div>
 
           {/* Mobile menu button */}
@@ -123,6 +141,23 @@ export default function Header() {
               >
                 Donate
               </Link>
+              <SignedOut>
+                <button
+                  type="button"
+                  className="w-full mt-4 btn-outline"
+                  onClick={() => {
+                    setMobileMenuOpen(false)
+                    handleAdminSignIn()
+                  }}
+                >
+                  Admin Sign In
+                </button>
+              </SignedOut>
+              <SignedIn>
+                <div className="mt-4">
+                  <UserButton afterSignOutUrl="/" />
+                </div>
+              </SignedIn>
             </div>
           </div>
         </Dialog.Panel>

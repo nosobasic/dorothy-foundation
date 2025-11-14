@@ -1,25 +1,45 @@
 import { useEffect } from 'react'
 import { Link, Outlet, useNavigate } from 'react-router-dom'
+import { useClerk, useUser } from '@clerk/clerk-react'
 import { useAuthStore } from '@/lib/store'
 
 export default function AdminLayout() {
-  const { isAuthenticated, clearAuth, user } = useAuthStore()
+  const { isAuthenticated, clearAuth, user: localUser } = useAuthStore()
+  const { isLoaded, isSignedIn, user: clerkUser } = useUser()
+  const { signOut } = useClerk()
   const navigate = useNavigate()
+  const hasLocalAuth = isAuthenticated()
 
   useEffect(() => {
-    if (!isAuthenticated()) {
+    if (hasLocalAuth) {
+      return
+    }
+    if (!isLoaded) {
+      return
+    }
+    if (!isSignedIn) {
       navigate('/admin/login')
     }
-  }, [isAuthenticated, navigate])
+  }, [hasLocalAuth, isLoaded, isSignedIn, navigate])
 
-  const handleLogout = () => {
-    clearAuth()
-    navigate('/admin/login')
+  const handleLogout = async () => {
+    if (hasLocalAuth) {
+      clearAuth()
+      navigate('/admin/login')
+      return
+    }
+
+    if (isSignedIn) {
+      await signOut({ redirectUrl: '/' })
+    }
   }
 
-  if (!isAuthenticated()) {
+  if (!hasLocalAuth && (!isLoaded || !isSignedIn)) {
     return null
   }
+
+  const displayEmail =
+    (hasLocalAuth ? localUser?.email : clerkUser?.primaryEmailAddress?.emailAddress || clerkUser?.emailAddresses?.[0]?.emailAddress) ?? ''
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -29,7 +49,7 @@ export default function AdminLayout() {
           <div className="flex justify-between items-center">
             <div>
               <h1 className="text-xl font-bold text-white">TDRMF Admin Dashboard</h1>
-              {user && <p className="text-sm text-gray-300">{user.email}</p>}
+              {displayEmail && <p className="text-sm text-gray-300">{displayEmail}</p>}
             </div>
             <div className="flex items-center space-x-4">
               <a href="/" className="text-sm hover:text-brand-purple" target="_blank" rel="noopener noreferrer">

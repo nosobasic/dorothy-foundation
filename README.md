@@ -182,6 +182,7 @@ SITE_URL=http://localhost:3000
 ```bash
 VITE_API_BASE_URL=http://localhost:8000
 VITE_STRIPE_PUBLISHABLE_KEY=pk_test_your_key_here
+VITE_CLERK_PUBLISHABLE_KEY=pk_test_your_clerk_key_here
 VITE_SITE_URL=http://localhost:3000
 ```
 
