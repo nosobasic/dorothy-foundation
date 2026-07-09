@@ -361,6 +361,8 @@ Run these tests to verify the application:
 6. Add environment variables
 7. Deploy
 
+**Render Python version:** Render defaults to Python 3.14 for new services. This project uses Python 3.12 (see `backend/.python-version`). If the build still picks 3.14, add this environment variable on Render: `PYTHON_VERSION=3.12.8`
+
 ### Database (Managed PostgreSQL)
 
 Use managed PostgreSQL from:
