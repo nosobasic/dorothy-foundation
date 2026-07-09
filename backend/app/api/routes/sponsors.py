@@ -4,9 +4,8 @@ from typing import List
 
 from app.core.database import get_db
 from app.models.sponsor_tier import SponsorTier
-from app.models.user import User
 from app.schemas.sponsor import SponsorTierCreate, SponsorTierUpdate, SponsorTierResponse
-from app.services.auth import get_current_user
+from app.services.auth import ClerkAdmin, get_current_admin
 
 router = APIRouter(prefix="/api/sponsors", tags=["sponsors"])
 
@@ -25,7 +24,7 @@ def get_sponsor_tiers(db: Session = Depends(get_db)):
 def create_sponsor_tier(
     tier_data: SponsorTierCreate,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    _admin: ClerkAdmin = Depends(get_current_admin)
 ):
     """Create sponsor tier (admin only)"""
     tier = SponsorTier(**tier_data.model_dump())
@@ -38,7 +37,7 @@ def create_sponsor_tier(
 @router.get("/admin", response_model=List[SponsorTierResponse])
 def get_all_sponsor_tiers_admin(
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    _admin: ClerkAdmin = Depends(get_current_admin)
 ):
     """Get all sponsor tiers including inactive (admin only)"""
     tiers = db.query(SponsorTier).order_by(SponsorTier.amount_cents.desc()).all()
@@ -50,7 +49,7 @@ def update_sponsor_tier(
     tier_id: int,
     tier_data: SponsorTierUpdate,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    _admin: ClerkAdmin = Depends(get_current_admin)
 ):
     """Update sponsor tier (admin only)"""
     tier = db.query(SponsorTier).filter(SponsorTier.id == tier_id).first()
@@ -69,7 +68,7 @@ def update_sponsor_tier(
 def delete_sponsor_tier(
     tier_id: int,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    _admin: ClerkAdmin = Depends(get_current_admin)
 ):
     """Delete sponsor tier (admin only)"""
     tier = db.query(SponsorTier).filter(SponsorTier.id == tier_id).first()

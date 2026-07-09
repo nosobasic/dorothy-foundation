@@ -1,14 +1,6 @@
-from .auth_service import (
-    get_password_hash,
-    verify_password,
-    create_access_token,
-    get_current_user,
-)
+from .clerk_auth import ClerkAdmin, get_current_admin
 
 __all__ = [
-    "get_password_hash",
-    "verify_password",
-    "create_access_token",
-    "get_current_user",
+    "ClerkAdmin",
+    "get_current_admin",
 ]
-

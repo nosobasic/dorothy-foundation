@@ -12,16 +12,21 @@ import { useToastStore } from '@/lib/store'
 
 const stripePromise = loadStripe((import.meta as any).env.VITE_STRIPE_PUBLISHABLE_KEY || '')
 
-const donationSchema = z.object({
-  amount: z.string().refine((val) => {
-    const num = parseFloat(val)
-    return !isNaN(num) && num >= 1
-  }, 'Amount must be at least $1'),
-  donor_name: z.string().optional(),
-  donor_email: z.string().email('Invalid email').optional().or(z.literal('')),
-  dedication_note: z.string().optional(),
-  is_recurring: z.boolean(),
-})
+const donationSchema = z
+  .object({
+    amount: z.string().refine((val) => {
+      const num = parseFloat(val)
+      return !isNaN(num) && num >= 1
+    }, 'Amount must be at least $1'),
+    donor_name: z.string().optional(),
+    donor_email: z.string().email('Invalid email').optional().or(z.literal('')),
+    dedication_note: z.string().optional(),
+    is_recurring: z.boolean(),
+  })
+  .refine((data) => !data.is_recurring || Boolean(data.donor_email), {
+    message: 'Email is required for recurring donations',
+    path: ['donor_email'],
+  })
 
 type DonationForm = z.infer<typeof donationSchema>
 
@@ -235,7 +240,7 @@ export default function Donate() {
                   error={errors.donor_name?.message}
                 />
                 <FormField
-                  label="Email"
+                  label={isRecurring ? 'Email (Required for recurring donations)' : 'Email'}
                   type="email"
                   {...register('donor_email')}
                   error={errors.donor_email?.message}

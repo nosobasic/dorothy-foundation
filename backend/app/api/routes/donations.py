@@ -5,9 +5,8 @@ from typing import List
 
 from app.core.database import get_db
 from app.models.donation import Donation
-from app.models.user import User
 from app.schemas.donation import DonationCheckout, DonationResponse, DonationStats
-from app.services.auth import get_current_user
+from app.services.auth import ClerkAdmin, get_current_admin
 from app.services.webhooks.stripe_service import stripe_service
 from app.services.webhooks.email_service import email_service
 from app.core.config import settings
@@ -144,7 +143,7 @@ async def stripe_webhook(request: Request, db: Session = Depends(get_db)):
 @router.get("/stats", response_model=DonationStats)
 def get_donation_stats(
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    _admin: ClerkAdmin = Depends(get_current_admin)
 ):
     """Get donation statistics (admin only)"""
     total_amount = db.query(func.sum(Donation.amount_cents)).filter(
@@ -170,7 +169,7 @@ def get_donation_stats(
 @router.get("/list", response_model=List[DonationResponse])
 def list_donations(
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    _admin: ClerkAdmin = Depends(get_current_admin)
 ):
     """List all donations (admin only)"""
     donations = db.query(Donation).order_by(Donation.created_at.desc()).all()

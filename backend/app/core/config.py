@@ -6,11 +6,9 @@ class Settings(BaseSettings):
     # Database
     DATABASE_URL: str = "sqlite:///./tdrmf.db"
     
-    # JWT
-    JWT_SECRET: str = "your-secret-key-change-in-production"
-    JWT_ALGORITHM: str = "HS256"
-    JWT_EXPIRATION_MINUTES: int = 60 * 24  # 24 hours
-    
+    # Clerk
+    CLERK_SECRET_KEY: str = "sk_test_placeholder"
+
     # Stripe
     STRIPE_SECRET_KEY: str = "sk_test_placeholder"
     STRIPE_WEBHOOK_SECRET: str = "whsec_placeholder"

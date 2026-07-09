@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.core.config import settings
-from app.api.routes import auth, events, donations, gallery, sponsors, contact
+from app.api.routes import events, donations, gallery, sponsors, contact
 
 app = FastAPI(
     title="The Dorothy R. Morgan Foundation API",
@@ -19,7 +19,6 @@ app.add_middleware(
 )
 
 # Include routers
-app.include_router(auth.router)
 app.include_router(events.router)
 app.include_router(donations.router)
 app.include_router(gallery.router)

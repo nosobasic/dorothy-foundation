@@ -23,7 +23,7 @@ A production-ready foundation website honoring Dorothy R. Morgan, lost on 9/11, 
 - **PostgreSQL** for database
 - **SQLAlchemy** + **Alembic** for ORM and migrations
 - **Stripe SDK** for payments
-- **JWT** for admin authentication
+- **Clerk** for admin authentication
 - **Boto3** for S3-compatible storage
 - **aiosmtplib** for email notifications
 
@@ -148,10 +148,8 @@ dorothy-foundation/
 # Database
 DATABASE_URL=postgresql://postgres:postgres@localhost:5432/tdrmf
 
-# JWT
-JWT_SECRET=your-secret-key-change-in-production
-JWT_ALGORITHM=HS256
-JWT_EXPIRATION_MINUTES=1440
+# Clerk (admin authentication)
+CLERK_SECRET_KEY=sk_test_your_clerk_secret_key_here
 
 # Stripe
 STRIPE_SECRET_KEY=sk_test_your_key_here
@@ -186,13 +184,34 @@ VITE_CLERK_PUBLISHABLE_KEY=pk_test_your_clerk_key_here
 VITE_SITE_URL=http://localhost:3000
 ```
 
-## 🔐 Default Admin Credentials
+## 🔐 Admin Setup (Clerk)
 
-After running the seed script:
-- **Email**: admin@tdrmf.org
-- **Password**: admin123
+Admin access uses [Clerk](https://clerk.com) with role-based authorization. Only users with `publicMetadata.role = "admin"` can access the admin panel and API.
 
-**⚠️ IMPORTANT**: Change these credentials immediately in production!
+### 1. Create a Clerk application
+
+1. Sign up at [clerk.com](https://clerk.com) and create an application
+2. Copy the **Publishable Key** to frontend `.env` as `VITE_CLERK_PUBLISHABLE_KEY`
+3. Copy the **Secret Key** to backend `.env` as `CLERK_SECRET_KEY`
+
+### 2. Restrict sign-up (recommended)
+
+In the Clerk Dashboard, disable public sign-up or restrict to invite-only so only authorized users can create accounts.
+
+### 3. Create admin users
+
+1. In Clerk Dashboard → **Users**, create or invite admin users
+2. For each admin user, set **Public metadata**:
+   ```json
+   { "role": "admin" }
+   ```
+
+### 4. Sign in
+
+1. Go directly to `/admin` (bookmark this URL)
+2. Sign in with your Clerk admin account when prompted
+
+**Note:** The legacy email/password login at `/admin/login` has been removed. Admin access is Clerk-only.
 
 ## 📝 Common Commands
 
@@ -232,7 +251,7 @@ make clean            # Remove build artifacts
 - ✅ Privacy policy and donation terms pages
 
 ### Admin Dashboard
-- ✅ JWT-based authentication
+- ✅ Clerk-based authentication with role gating (`publicMetadata.role = "admin"`)
 - ✅ Event management (CRUD with publish toggle)
 - ✅ Gallery moderation (approve/reject submissions)
 - ✅ Donation records and statistics
@@ -292,7 +311,7 @@ Run these tests to verify the application:
    - [ ] File size validation works
 
 5. **Admin**
-   - [ ] Login with admin credentials
+   - [ ] Sign in via Clerk with an admin user (`publicMetadata.role = "admin"`)
    - [ ] Dashboard shows statistics
    - [ ] Create new event
    - [ ] Approve gallery photo
@@ -303,7 +322,7 @@ Run these tests to verify the application:
 
 ### Core Models
 
-**User** - Admin users
+**User** - Legacy admin users (seed data only; admin auth is via Clerk)
 - id, email, hashed_password, role
 
 **Event** - Community events
@@ -380,19 +399,19 @@ To replace the hero images:
 ## 💰 Exporting Donations CSV
 
 ### Via Admin Dashboard
-1. Login to `/admin`
+1. Sign in to `/admin` with a Clerk admin account
 2. Go to "Donations"
 3. Click "Export CSV"
 
 ### Via API
 ```bash
-curl -H "Authorization: Bearer YOUR_TOKEN" \
+curl -H "Authorization: Bearer YOUR_CLERK_SESSION_TOKEN" \
   http://localhost:8000/api/donations/list > donations.json
 ```
 
 ## 📅 Adding Sponsor Tiers for Events
 
-1. Login to admin dashboard
+1. Sign in to the admin dashboard with a Clerk admin account
 2. Go to "Sponsors" section
 3. Click "Create Tier"
 4. Fill in:
@@ -478,8 +497,9 @@ Built with ❤️ to honor Dorothy R. Morgan and support families in healing and
 
 Before deploying to production:
 
-- [ ] Change admin credentials
-- [ ] Update `JWT_SECRET` to a strong random value
+- [ ] Create Clerk admin users with `publicMetadata.role = "admin"`
+- [ ] Disable public sign-up in Clerk Dashboard
+- [ ] Set `CLERK_SECRET_KEY` in production backend environment
 - [ ] Switch Stripe keys to live mode
 - [ ] Configure production SMTP settings
 - [ ] Set up production database backups

@@ -1,19 +1,9 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Dialog } from '@headlessui/react'
-import { SignedIn, SignedOut, useClerk, UserButton } from '@clerk/clerk-react'
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const { openSignIn } = useClerk()
-
-  const handleAdminSignIn = () => {
-    openSignIn({
-      afterSignInUrl: '/admin',
-      afterSignUpUrl: '/admin',
-      signUpForceRedirectUrl: '/admin',
-    })
-  }
 
   const navigation = [
     { name: 'Home', href: '/' },
@@ -29,15 +19,12 @@ export default function Header() {
     <header className="bg-white shadow-sm">
       <nav className="container-custom px-4" aria-label="Main navigation">
         <div className="flex justify-between items-center h-16 md:h-20">
-          {/* Logo */}
           <Link to="/" className="flex items-center">
-            {/* Mobile: Favicon */}
             <img
               src="/drm-favicon.png"
               alt="Dorothy R. Morgan Foundation"
               className="h-12 sm:h-14 md:hidden w-auto"
             />
-            {/* Desktop: Full Logo */}
             <img
               src="/drm-logo.png"
               alt="Dorothy R. Morgan Foundation"
@@ -45,7 +32,6 @@ export default function Header() {
             />
           </Link>
 
-          {/* Desktop Navigation */}
           <div className="hidden lg:flex lg:items-center lg:space-x-8">
             {navigation.map((item) => (
               <Link
@@ -59,17 +45,8 @@ export default function Header() {
             <Link to="/donate" className="btn-primary">
               Donate
             </Link>
-            <SignedOut>
-              <button type="button" className="btn-outline" onClick={handleAdminSignIn}>
-                Admin Sign In
-              </button>
-            </SignedOut>
-            <SignedIn>
-              <UserButton afterSignOutUrl="/" />
-            </SignedIn>
           </div>
 
-          {/* Mobile menu button */}
           <button
             type="button"
             className="lg:hidden p-2 text-deep-navy"
@@ -93,7 +70,6 @@ export default function Header() {
         </div>
       </nav>
 
-      {/* Mobile menu */}
       <Dialog as="div" className="lg:hidden" open={mobileMenuOpen} onClose={setMobileMenuOpen}>
         <div className="fixed inset-0 z-50" />
         <Dialog.Panel className="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-white px-6 py-6 sm:max-w-sm sm:ring-1 sm:ring-gray-900/10">
@@ -141,23 +117,6 @@ export default function Header() {
               >
                 Donate
               </Link>
-              <SignedOut>
-                <button
-                  type="button"
-                  className="w-full mt-4 btn-outline"
-                  onClick={() => {
-                    setMobileMenuOpen(false)
-                    handleAdminSignIn()
-                  }}
-                >
-                  Admin Sign In
-                </button>
-              </SignedOut>
-              <SignedIn>
-                <div className="mt-4">
-                  <UserButton afterSignOutUrl="/" />
-                </div>
-              </SignedIn>
             </div>
           </div>
         </Dialog.Panel>
@@ -165,4 +124,3 @@ export default function Header() {
     </header>
   )
 }
-

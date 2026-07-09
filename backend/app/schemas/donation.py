@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, model_validator
 from datetime import datetime
 from typing import Optional
 
@@ -9,6 +9,12 @@ class DonationCheckout(BaseModel):
     donor_name: Optional[str] = None
     is_recurring: bool = False
     dedication_note: Optional[str] = None
+
+    @model_validator(mode="after")
+    def require_email_for_recurring(self):
+        if self.is_recurring and not self.donor_email:
+            raise ValueError("Email is required for recurring donations")
+        return self
 
 
 class DonationResponse(BaseModel):

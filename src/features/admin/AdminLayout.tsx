@@ -1,49 +1,23 @@
-import { useEffect } from 'react'
-import { Link, Outlet, useNavigate } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 import { useClerk, useUser } from '@clerk/clerk-react'
-import { useAuthStore } from '@/lib/store'
 
 export default function AdminLayout() {
-  const { isAuthenticated, clearAuth, user: localUser } = useAuthStore()
-  const { isLoaded, isSignedIn, user: clerkUser } = useUser()
+  const { isLoaded, user } = useUser()
   const { signOut } = useClerk()
-  const navigate = useNavigate()
-  const hasLocalAuth = isAuthenticated()
-
-  useEffect(() => {
-    if (hasLocalAuth) {
-      return
-    }
-    if (!isLoaded) {
-      return
-    }
-    if (!isSignedIn) {
-      navigate('/admin/login')
-    }
-  }, [hasLocalAuth, isLoaded, isSignedIn, navigate])
 
   const handleLogout = async () => {
-    if (hasLocalAuth) {
-      clearAuth()
-      navigate('/admin/login')
-      return
-    }
-
-    if (isSignedIn) {
-      await signOut({ redirectUrl: '/' })
-    }
+    await signOut({ redirectUrl: '/' })
   }
 
-  if (!hasLocalAuth && (!isLoaded || !isSignedIn)) {
+  if (!isLoaded || !user) {
     return null
   }
 
   const displayEmail =
-    (hasLocalAuth ? localUser?.email : clerkUser?.primaryEmailAddress?.emailAddress || clerkUser?.emailAddresses?.[0]?.emailAddress) ?? ''
+    user.primaryEmailAddress?.emailAddress ?? user.emailAddresses?.[0]?.emailAddress ?? ''
 
   return (
     <div className="min-h-screen bg-gray-100">
-      {/* Admin Header */}
       <header className="bg-deep-navy text-white">
         <div className="container-custom py-4">
           <div className="flex justify-between items-center">
@@ -65,7 +39,6 @@ export default function AdminLayout() {
 
       <div className="container-custom py-8">
         <div className="flex gap-8">
-          {/* Sidebar */}
           <aside className="w-64 flex-shrink-0">
             <nav className="card space-y-1" aria-label="Admin navigation">
               <Link
@@ -101,7 +74,6 @@ export default function AdminLayout() {
             </nav>
           </aside>
 
-          {/* Main Content */}
           <main className="flex-1">
             <Outlet />
           </main>
@@ -110,4 +82,3 @@ export default function AdminLayout() {
     </div>
   )
 }
-

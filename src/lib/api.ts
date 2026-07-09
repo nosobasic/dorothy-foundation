@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { getAuthToken } from '@/lib/authToken'
 
 const API_BASE_URL = (import.meta as any).env.VITE_API_BASE_URL || 'http://localhost:8000'
 
@@ -9,31 +10,12 @@ export const api = axios.create({
   },
 })
 
-// Add auth token to requests
-api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('auth_token')
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`
+api.interceptors.request.use(async (config) => {
+  const clerkToken = await getAuthToken()
+  if (clerkToken) {
+    config.headers.Authorization = `Bearer ${clerkToken}`
   }
   return config
 })
 
-// Handle auth errors
-api.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response?.status === 401) {
-      const legacyToken = localStorage.getItem('auth_token')
-      if (legacyToken) {
-        localStorage.removeItem('auth_token')
-        if (window.location.pathname.startsWith('/admin') && window.location.pathname !== '/admin/login') {
-          window.location.href = '/admin/login'
-        }
-      }
-    }
-    return Promise.reject(error)
-  }
-)
-
 export default api
-

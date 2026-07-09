@@ -6,10 +6,9 @@ from datetime import datetime
 from app.core.database import get_db
 from app.models.event import Event
 from app.models.rsvp import RSVP
-from app.models.user import User
 from app.schemas.event import EventCreate, EventUpdate, EventResponse
 from app.schemas.rsvp import RSVPCreate
-from app.services.auth import get_current_user
+from app.services.auth import ClerkAdmin, get_current_admin
 
 router = APIRouter(tags=["events"])
 
@@ -60,7 +59,7 @@ def create_rsvp(event_id: int, rsvp_data: RSVPCreate, db: Session = Depends(get_
 def create_event(
     event_data: EventCreate,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    _admin: ClerkAdmin = Depends(get_current_admin)
 ):
     """Create new event (admin only)"""
     event = Event(**event_data.model_dump())
@@ -73,7 +72,7 @@ def create_event(
 @router.get("/api/admin/events", response_model=List[EventResponse])
 def get_all_events_admin(
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    _admin: ClerkAdmin = Depends(get_current_admin)
 ):
     """Get all events including unpublished (admin only)"""
     events = db.query(Event).order_by(Event.start_at.desc()).all()
@@ -85,7 +84,7 @@ def update_event(
     event_id: int,
     event_data: EventUpdate,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    _admin: ClerkAdmin = Depends(get_current_admin)
 ):
     """Update event (admin only)"""
     event = db.query(Event).filter(Event.id == event_id).first()
@@ -104,7 +103,7 @@ def update_event(
 def delete_event(
     event_id: int,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    _admin: ClerkAdmin = Depends(get_current_admin)
 ):
     """Delete event (admin only)"""
     event = db.query(Event).filter(Event.id == event_id).first()

@@ -6,9 +6,8 @@ from datetime import datetime
 
 from app.core.database import get_db
 from app.models.gallery_photo import GalleryPhoto
-from app.models.user import User
 from app.schemas.gallery import GalleryPhotoResponse, GalleryPhotoApprove
-from app.services.auth import get_current_user
+from app.services.auth import ClerkAdmin, get_current_admin
 from app.services.storage.s3_service import s3_service
 
 router = APIRouter(prefix="/api/gallery", tags=["gallery"])
@@ -104,7 +103,7 @@ async def submit_photo(
 @router.get("/admin/pending", response_model=List[GalleryPhotoResponse])
 def get_pending_photos(
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    _admin: ClerkAdmin = Depends(get_current_admin)
 ):
     """Get pending gallery photos (admin only)"""
     photos = db.query(GalleryPhoto).filter(
@@ -126,7 +125,7 @@ def approve_photo(
     photo_id: int,
     approve_data: GalleryPhotoApprove,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    _admin: ClerkAdmin = Depends(get_current_admin)
 ):
     """Approve or reject a photo (admin only)"""
     photo = db.query(GalleryPhoto).filter(GalleryPhoto.id == photo_id).first()
@@ -149,7 +148,7 @@ def approve_photo(
 def delete_photo(
     photo_id: int,
     db: Session = Depends(get_db),
-    current_user: User = Depends(get_current_user)
+    _admin: ClerkAdmin = Depends(get_current_admin)
 ):
     """Delete a photo (admin only)"""
     photo = db.query(GalleryPhoto).filter(GalleryPhoto.id == photo_id).first()

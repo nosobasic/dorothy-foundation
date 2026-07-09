@@ -15,7 +15,7 @@ from app.models.user import User
 from app.models.event import Event
 from app.models.sponsor_tier import SponsorTier
 from app.models.gallery_photo import GalleryPhoto
-from app.services.auth import get_password_hash
+from app.services.auth.auth_service import get_password_hash
 
 
 def seed_database():
