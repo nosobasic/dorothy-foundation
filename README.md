@@ -171,7 +171,7 @@ SMTP_PASS=your-app-password
 CONTACT_TO_EMAIL=info@tdrmf.org
 
 # CORS
-FRONTEND_URL=http://localhost:3000
+CORS_ORIGINS=http://localhost:3000
 SITE_URL=http://localhost:3000
 ```
 

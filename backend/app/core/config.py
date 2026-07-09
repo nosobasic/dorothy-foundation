@@ -1,5 +1,4 @@
 from pydantic_settings import BaseSettings
-from typing import Optional
 
 
 class Settings(BaseSettings):
@@ -28,11 +27,15 @@ class Settings(BaseSettings):
     SMTP_PASS: str = "placeholder"
     CONTACT_TO_EMAIL: str = "info@tdrmf.org"
     
-    # CORS
-    FRONTEND_URL: str = "http://localhost:3000"
+    # CORS — comma-separated list of allowed frontend origins
+    CORS_ORIGINS: str = "http://localhost:3000"
     
     # Site
     SITE_URL: str = "http://localhost:3000"
+
+    @property
+    def cors_origins(self) -> list[str]:
+        return [origin.strip() for origin in self.CORS_ORIGINS.split(",") if origin.strip()]
     
     class Config:
         env_file = ".env"
