@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { Toaster } from '@/components/common/Toaster'
 import Layout from '@/components/common/Layout'
@@ -18,15 +19,7 @@ import Privacy from '@/routes/Privacy'
 import DonationTerms from '@/routes/DonationTerms'
 import NotFound from '@/routes/NotFound'
 
-// Admin
-import AdminLayout from '@/features/admin/AdminLayout'
-import AdminDashboard from '@/features/admin/AdminDashboard'
-import AdminEvents from '@/features/admin/AdminEvents'
-import AdminGallery from '@/features/admin/AdminGallery'
-import AdminDonations from '@/features/admin/AdminDonations'
-import AdminSponsors from '@/features/admin/AdminSponsors'
-import AdminGuard from '@/features/admin/AdminGuard'
-import ClerkAdminShell from '@/components/auth/ClerkAdminShell'
+const AdminRoutes = lazy(() => import('@/features/admin/AdminRoutes'))
 
 function App() {
   return (
@@ -49,23 +42,21 @@ function App() {
           <Route path="donation-terms" element={<DonationTerms />} />
         </Route>
 
-        {/* Admin routes */}
+        {/* Admin routes — lazy loaded so Clerk is not bundled on public pages */}
         <Route
-          path="/admin"
+          path="/admin/*"
           element={
-            <ClerkAdminShell>
-              <AdminGuard>
-                <AdminLayout />
-              </AdminGuard>
-            </ClerkAdminShell>
+            <Suspense
+              fallback={
+                <div className="min-h-screen bg-gray-100 flex items-center justify-center">
+                  <p className="text-gray-600">Loading...</p>
+                </div>
+              }
+            >
+              <AdminRoutes />
+            </Suspense>
           }
-        >
-          <Route index element={<AdminDashboard />} />
-          <Route path="events" element={<AdminEvents />} />
-          <Route path="gallery" element={<AdminGallery />} />
-          <Route path="donations" element={<AdminDonations />} />
-          <Route path="sponsors" element={<AdminSponsors />} />
-        </Route>
+        />
 
         {/* 404 Catch-all - must be last */}
         <Route path="*" element={<NotFound />} />
@@ -76,4 +67,3 @@ function App() {
 }
 
 export default App
-

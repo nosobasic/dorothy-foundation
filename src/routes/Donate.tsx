@@ -404,7 +404,9 @@ export default function Donate() {
               >
                 {processing
                   ? 'Processing...'
-                  : `Proceed to Payment - $${finalAmount!.toFixed(2)}${isRecurring ? '/month' : ''}`}
+                  : isValidAmount
+                    ? `Proceed to Payment - $${finalAmount.toFixed(2)}${isRecurring ? '/month' : ''}`
+                    : 'Select an amount to continue'}
               </button>
 
               <p className="text-xs text-gray-500 text-center">
@@ -427,9 +429,9 @@ export default function Donate() {
                   &larr; Edit details
                 </button>
               </div>
-              {stripePromise ? (
+              {stripePromise && finalAmount !== null ? (
                 <Elements stripe={stripePromise} options={{ clientSecret }}>
-                  <CheckoutForm amount={finalAmount!} isRecurring={checkoutRecurring} />
+                  <CheckoutForm amount={finalAmount} isRecurring={checkoutRecurring} />
                 </Elements>
               ) : (
                 <p className="text-red-500 text-sm" role="alert">
