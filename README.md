@@ -471,6 +471,12 @@ echo $DATABASE_URL
 - Create bucket: `tdrmf-gallery`
 - Verify credentials in `.env`
 
+### Clerk Admin Blank Page / `failed_to_load_clerk_js`
+- This usually means your Clerk **custom domain** (e.g. `clerk.yourdomain.com`) is not fully configured
+- In Clerk Dashboard → **Domains**, verify DNS records are correct and SSL shows as active
+- Until DNS is ready, disable the custom Frontend API domain in Clerk and use Clerk's default domain
+- Public pages like `/donate` no longer depend on Clerk; only `/admin` requires it
+
 ### Frontend Not Connecting to Backend
 - Check CORS settings in `apps/backend/app/main.py`
 - Verify `VITE_API_BASE_URL` in frontend `.env`

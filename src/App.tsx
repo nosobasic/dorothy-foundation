@@ -26,6 +26,7 @@ import AdminGallery from '@/features/admin/AdminGallery'
 import AdminDonations from '@/features/admin/AdminDonations'
 import AdminSponsors from '@/features/admin/AdminSponsors'
 import AdminGuard from '@/features/admin/AdminGuard'
+import ClerkAdminShell from '@/components/auth/ClerkAdminShell'
 
 function App() {
   return (
@@ -52,9 +53,11 @@ function App() {
         <Route
           path="/admin"
           element={
-            <AdminGuard>
-              <AdminLayout />
-            </AdminGuard>
+            <ClerkAdminShell>
+              <AdminGuard>
+                <AdminLayout />
+              </AdminGuard>
+            </ClerkAdminShell>
           }
         >
           <Route index element={<AdminDashboard />} />

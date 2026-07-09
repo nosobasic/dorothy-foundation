@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useAuth } from '@clerk/clerk-react'
-import { setTokenGetter } from '@/lib/authToken'
+import { clearTokenGetter, setTokenGetter } from '@/lib/authToken'
 
 export default function ClerkAuthBridge() {
   const { getToken, isLoaded, isSignedIn } = useAuth()
@@ -12,6 +12,10 @@ export default function ClerkAuthBridge() {
       }
       return getToken()
     })
+
+    return () => {
+      clearTokenGetter()
+    }
   }, [getToken, isLoaded, isSignedIn])
 
   return null

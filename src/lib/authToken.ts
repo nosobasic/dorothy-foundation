@@ -6,6 +6,10 @@ export function setTokenGetter(getter: TokenGetter) {
   tokenGetter = getter
 }
 
+export function clearTokenGetter() {
+  tokenGetter = null
+}
+
 export async function getAuthToken(): Promise<string | null> {
   if (!tokenGetter) {
     return null
