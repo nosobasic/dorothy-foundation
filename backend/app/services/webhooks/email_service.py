@@ -1,3 +1,5 @@
+from datetime import datetime
+
 import aiosmtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -75,7 +77,4 @@ Tax ID: [501(c)(3) Application Pending]
         )
 
 
-from datetime import datetime
-
 email_service = EmailService()
-

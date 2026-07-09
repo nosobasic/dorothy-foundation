@@ -33,17 +33,13 @@ export const SOCIAL_LINKS = {
   instagram: 'https://instagram.com/tdrmf',
 }
 
-export const MAILING_INSTRUCTIONS = `
-**Mail Your Donation:**
-
-Please make checks payable to "The Dorothy R. Morgan Foundation" and mail to:
-
-The Dorothy R. Morgan Foundation  
-123 Memorial Way  
-New York, NY 10001
-
-**Important:** Please include your email address and "Dorothy Morgan Foundation Donation" in the memo line for receipt purposes.
-`
+export const MAILING_INSTRUCTIONS = {
+  title: 'Mail Your Donation',
+  payableTo: 'The Dorothy R. Morgan Foundation',
+  address: ['The Dorothy R. Morgan Foundation', '123 Memorial Way', 'New York, NY 10001'],
+  note:
+    'Please include your email address and "Dorothy Morgan Foundation Donation" in the memo line for receipt purposes.',
+}
 
 export const DONATION_501C3_NOTICE = `The Dorothy R. Morgan Foundation has applied for 501(c)(3) tax-exempt status. We will provide tax receipts once our application is approved.`
 

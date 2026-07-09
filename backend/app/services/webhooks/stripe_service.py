@@ -13,6 +13,7 @@ class StripeService:
                 amount=amount_cents,
                 currency=currency,
                 metadata=metadata or {},
+                automatic_payment_methods={"enabled": True},
             )
             return intent
         except stripe.error.StripeError as e:
@@ -21,14 +22,26 @@ class StripeService:
 
     @staticmethod
     def create_subscription(customer_id: str, price_id: str, metadata: dict = None):
-        """Create a recurring subscription"""
+        """Create a recurring subscription with an incomplete first payment"""
         try:
             subscription = stripe.Subscription.create(
                 customer=customer_id,
                 items=[{"price": price_id}],
                 metadata=metadata or {},
+                payment_behavior="default_incomplete",
+                payment_settings={"save_default_payment_method": "on_subscription"},
+                expand=["latest_invoice.payment_intent"],
             )
             return subscription
+        except stripe.error.StripeError as e:
+            print(f"Stripe error: {e}")
+            return None
+
+    @staticmethod
+    def retrieve_payment_intent(payment_intent_id: str):
+        """Retrieve a payment intent from Stripe"""
+        try:
+            return stripe.PaymentIntent.retrieve(payment_intent_id)
         except stripe.error.StripeError as e:
             print(f"Stripe error: {e}")
             return None
